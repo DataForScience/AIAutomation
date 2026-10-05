@@ -1,10 +1,10 @@
-# Automate The Boring Stuff With LLMs
+# AI Automation for Developers
 
-![GitHub](https://img.shields.io/github/license/DataForScience/AutomateTheBoringStuff)
+![GitHub](https://img.shields.io/github/license/DataForScience/AIAutomation)
 [![Twitter @data4sci](https://img.shields.io/twitter/follow/data4sci)](https://twitter.com/intent/follow?screen_name=data4sci)
-![GitHub top language](https://img.shields.io/github/languages/top/DataForScience/AutomateTheBoringStuff)
-![GitHub repo size](https://img.shields.io/github/repo-size/DataForScience/AutomateTheBoringStuff)
-![GitHub last commit](https://img.shields.io/github/last-commit/DataForScience/AutomateTheBoringStuff)
+![GitHub top language](https://img.shields.io/github/languages/top/DataForScience/AIAutomation)
+![GitHub repo size](https://img.shields.io/github/repo-size/DataForScience/AIAutomation)
+![GitHub last commit](https://img.shields.io/github/last-commit/DataForScience/AIAutomation)
 
 [![Substack](https://img.shields.io/badge/Data_For_Science-Subscribe-blue)](https://data4sci.substack.com/)
 [![Data Science Briefing](https://img.shields.io/badge/Data_Science_Briefing-Subscribe-blue)](https://data4sci.com/newsletter)
@@ -56,7 +56,7 @@ A CrewAI multi-agent pipeline that audits real privacy policies against a GDPR/C
 **Notebook:** [`4. ChatBot.ipynb`](4.%20ChatBot.ipynb)
 A laptop-friendly RAG chatbot over a Wikipedia subset, using local sentence-transformer embeddings, Chroma, and tool use.
 
-Slides for the webinar live in [`slides/AutomateTheBoringStuff.pdf`](slides/AutomateTheBoringStuff.pdf).
+Slides for the webinar live in [`slides/AIAutomation.pdf`](slides/AIAutomation.pdf).
 
 ## References
 
