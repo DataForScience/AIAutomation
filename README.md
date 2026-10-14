@@ -28,13 +28,12 @@ This tutorial is divided into four parts:
 Turn free-form job descriptions into validated, typed records using a Pydantic schema and LangChain's `PydanticOutputParser`. 
 
 ### 2. **Summarization**
-- Map-reduce chain demo
 - Action-item templates
 - Router prompts
-- Misclassification
+- Misclassification auditing
   
 **Notebook:** [`2. Summarization.ipynb`](2.%20Summarization.ipynb)
-Map-reduce summarization of long arXiv papers, plus a structured action-item template for downstream automation.
+Triage of arXiv papers: a structured action-item template for downstream automation, and a router that classifies each paper (theory / experimental / survey) and dispatches it to a specialist summarizer, with an auditor to catch misroutes.
 
 ### 3. **Agents**
 - Agent review
