@@ -25,7 +25,8 @@ This tutorial is divided into four parts:
 - Prompt guardrail patterns
   
 **Notebook:** [`1. Structured Extraction.ipynb`](1.%20Structured%20Extraction.ipynb)
-Turn free-form job descriptions into validated, typed records using a Pydantic schema and LangChain's `PydanticOutputParser`. 
+
+Turns free-form job descriptions (from the Hugging Face `jacob-hugging-face/job-descriptions` dataset) into validated, typed records. A Pydantic `JobPosting` schema is the single source of truth: it uses explicit nullability, `Literal` enums, and validators whose error messages flow back to the model. A LangChain chain pairs a guardrailed system prompt (extract only what's in the source, flag non-job content) with `PydanticOutputParser`. When output fails to parse or validate, a self-healing loop re-prompts with the exact error. The notebook runs a sample with progress tracking and failure logging, sanity-checks the results by plotting the top skills and the seniority distribution, and ends with adversarial inputs (a news article, a prompt injection, and a recipe) to test the guardrails.
 
 ### 2. **Summarization**
 - Action-item templates
@@ -33,7 +34,8 @@ Turn free-form job descriptions into validated, typed records using a Pydantic s
 - Misclassification auditing
   
 **Notebook:** [`2. Summarization.ipynb`](2.%20Summarization.ipynb)
-Triage of arXiv papers: a structured action-item template for downstream automation, and a router that classifies each paper (theory / experimental / survey) and dispatches it to a specialist summarizer, with an auditor to catch misroutes.
+
+Triages long arXiv papers streamed from the `ccdv/arxiv-summarization` dataset. First, an action-item template turns a paper summary into a structured `PaperBrief`: a summary, up to five typed action items (e.g. `try-method`, `replicate-experiment`) with priorities, and open questions, ready for downstream automation. Next, a router prompt with a shared rubric and few-shot examples classifies each paper as `theory`, `experimental`, or `survey` and sends it to a specialist summarizer, because a theory paper summarized with an applied template tends to come back with invented datasets and metrics. An auditor re-asks the classification question using the same rubric to catch misroutes.
 
 ### 3. **Agents**
 - Agent review
@@ -43,7 +45,8 @@ Triage of arXiv papers: a structured action-item template for downstream automat
 - Compliance checklist creation
   
 **Notebook:** [`3. Agents.ipynb`](3.%20Agents.ipynb)
-A CrewAI multi-agent pipeline that audits real privacy policies against a GDPR/CCPA compliance checklist.
+
+A CrewAI multi-agent pipeline that audits real privacy policies (GitHub, DuckDuckGo, and Wikipedia, with an offline fallback) against an 8-item GDPR/CCPA compliance checklist. Three single-responsibility agents run as a sequential crew: a **Privacy Researcher** extracts quoted factual statements, a **Compliance Officer** maps them to checklist items as covered, partial, or missing, and an **Audit Writer** produces a one-page executive report with a verdict, the top gaps, and remediation steps. The notebook runs the crew synchronously, one policy at a time, then asynchronously with all policies in parallel, plots the speed difference, and writes the per-policy results to [`data/compliance_audits.json`](data/compliance_audits.json) for downstream tools.
 
 ### 4. **ChatBot**
 - Embeddings
@@ -53,7 +56,8 @@ A CrewAI multi-agent pipeline that audits real privacy policies against a GDPR/C
 - Interactive agent
   
 **Notebook:** [`4. ChatBot.ipynb`](4.%20ChatBot.ipynb)
-A laptop-friendly RAG chatbot over a Wikipedia subset, using local sentence-transformer embeddings, Chroma, and tool use.
+
+A laptop-friendly RAG chatbot over the `rag-datasets/rag-mini-wikipedia` corpus (~3,200 passages). Passages are embedded locally with `all-MiniLM-L6-v2` (no extra API key) and stored in an in-memory Chroma collection. A plain RAG chain answers only from the retrieved passages, cites them by number, and says when it doesn't know; it is evaluated on the bundled Q&A split with exact-match and substring-match scores. The notebook then adds tools (`wiki_search`, `calculator`, and `now`) and builds an interactive tool-calling agent that decides on each turn whether to search, compute, or check the time.
 
 Slides for the webinar live in [`slides/AIAutomation.pdf`](slides/AIAutomation.pdf).
 
